@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,18 +9,28 @@
 </head>
 <body>
 <!--url ="/casadocodigo/produtos" -->
-
-<c:url value="/produtos" var="url"/>
-	<form action="${url}" method="post">
+<c:url value="/produtos" var="url" />
+											<!-- commandName="product" -->	
+	<form:form action="${url}" method="post" commandName="objetoAtual">
 		<div>
-			<label for="title">Titulo</label> <input type="text" name="title" id="title" />
+			<label for="title">Titulo</label>
+			<form:input path="title"/>
+			<form:errors path="title"/>
 		</div>
 		<div>
 			<label for="description">Descrição</label>
-			<textarea rows="10" cols="20" name="description" id="description"></textarea>
+			<form:textarea path="description" rows="10"/>
+			<form:errors path="description" />
 		</div>
 		<div>
-			<label for="pages">Número de paginas</label> <input type="text" name="pages" id="pages" />
+			<label for="pages">Número de paginas</label>
+			<form:input path="pages"/>
+			<form:errors path="pages"/>
+		</div>
+		<div>
+			<label for="releaseDate">Data de lançamento</label> 
+			<input name="releaseDate" type="date" />
+			<form:errors path="releaseDate" />
 		</div>
 		<c:forEach items="${types}" var="bookType" varStatus="status">
 			<div>
@@ -32,6 +43,6 @@
 			<input type="submit" value="Enviar">
 		</div>
 		
-	</form>
+	</form:form>
 </body>
 </html>
